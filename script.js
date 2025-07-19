@@ -45,41 +45,60 @@ const cursos = [
 ];
 
 const malla = document.getElementById("malla");
-
+const ciclosMap = new Map();
 cursos.forEach(curso => {
-  const div = document.createElement("div");
-  div.classList.add("curso");
-  div.dataset.id = curso.id;
-  div.dataset.prerequisitos = JSON.stringify(curso.prerequisitos);
-  div.textContent = curso.nombre;
-
-  if (curso.prerequisitos.length > 0) {
-    div.classList.add("bloqueado");
+  if (!ciclosMap.has(curso.ciclo)) {
+    ciclosMap.set(curso.ciclo, []);
   }
+  ciclosMap.get(curso.ciclo).push(curso);
+});
 
-  div.addEventListener("click", () => {
-    if (div.classList.contains("completado")) {
-      div.classList.remove("completado");
+ciclosMap.forEach((cursosDelCiclo, numeroCiclo) => {
+  const contenedorCiclo = document.createElement("div");
+  contenedorCiclo.classList.add("ciclo");
+
+  const titulo = document.createElement("h2");
+  titulo.textContent = `Ciclo ${numeroCiclo}`;
+  contenedorCiclo.appendChild(titulo);
+
+  cursosDelCiclo.forEach(curso => {
+    const div = document.createElement("div");
+    div.classList.add("curso");
+    div.dataset.id = curso.id;
+    div.dataset.prerequisitos = JSON.stringify(curso.prerequisitos);
+    div.textContent = curso.nombre;
+
+    if (curso.prerequisitos.length > 0) {
+      div.classList.add("bloqueado");
+    }
+
+    div.addEventListener("click", () => {
+      if (div.classList.contains("completado")) {
+        div.classList.remove("completado");
+        actualizarCursos();
+        return;
+      }
+
+      const prereqs = JSON.parse(div.dataset.prerequisitos);
+      const cumplidos = prereqs.every(pr =>
+        document.querySelector(`[data-id="${pr}"]`)?.classList.contains("completado")
+      );
+
+      if (!cumplidos) {
+        alert("Este curso tiene prerequisitos que aún no has completado.");
+        return;
+      }
+
+      div.classList.add("completado");
       actualizarCursos();
-      return;
-    }
+    });
 
-    const prereqs = JSON.parse(div.dataset.prerequisitos);
-    const cumplidos = prereqs.every(pr =>
-      document.querySelector(`[data-id="${pr}"]`)?.classList.contains("completado")
-    );
-
-    if (!cumplidos) {
-      alert("Este curso tiene prerequisitos que aún no has completado.");
-      return;
-    }
-
-    div.classList.add("completado");
-    actualizarCursos();
+    contenedorCiclo.appendChild(div);
   });
 
-  malla.appendChild(div);
+  malla.appendChild(contenedorCiclo);
 });
+
 function actualizarCursos() {
   document.querySelectorAll(".curso").forEach(div => {
     const prereqs = JSON.parse(div.dataset.prerequisitos || "[]");
