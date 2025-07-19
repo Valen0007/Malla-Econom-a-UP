@@ -5,3 +5,60 @@
   <title>Malla Interactiva - Economía</title>
   <link rel="stylesheet" href="style.css">
   <style>
+body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffeef3;
+      color: #5a2b41;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+    }
+
+    #malla {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .curso {
+      background-color: #fff0f6;
+      border: 2px solid #f3c1d9;
+      border-radius: 10px;
+      padding: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      width: 200px;
+      transition: background 0.3s;
+    }
+
+    .curso:hover {
+      background-color: #fce3ee;
+    }
+
+    .curso.completado {
+      background-color: #c3f3c1;
+      border-color: #8ad38a;
+      text-decoration: line-through;
+    }
+
+    .curso.bloqueado {
+      background-color: #f0f0f0;
+      border-color: #cccccc;
+      color: #999;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Interactiva - Economía</h1>
+  <div id="malla"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
