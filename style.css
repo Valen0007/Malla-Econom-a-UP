@@ -1,0 +1,39 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #ffeef3;
+  color: #5a2b41;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  text-align: center;
+  color: #d63384;
+}
+
+#malla {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.curso {
+  background-color: #fff0f6;
+  border: 2px solid #f3c1d9;
+  border-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.curso:hover {
+  background-color: #fce3ee;
+}
+
+.curso.completado {
+  background-color: #c3f3c1;
+  border-color: #8ad38a;
+  text-decoration: line-through;
+}
