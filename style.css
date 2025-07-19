@@ -37,3 +37,10 @@ h1 {
   border-color: #8ad38a;
   text-decoration: line-through;
 }
+
+.curso.bloqueado {
+  background-color: #f0f0f0;
+  border-color: #cccccc;
+  color: #999;
+  cursor: not-allowed;
+}
