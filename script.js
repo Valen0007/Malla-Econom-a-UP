@@ -92,15 +92,3 @@ function actualizarCursos() {
     }
   });
 }
-🧼 Recuerda:
-Asegúrate también de tener este estilo en tu style.css para que los cursos bloqueados se vean grisecitos:
-
-css
-Copiar
-Editar
-.curso.bloqueado {
-  background-color: #f0f0f0;
-  border-color: #cccccc;
-  color: #999;
-  cursor: not-allowed;
-}
